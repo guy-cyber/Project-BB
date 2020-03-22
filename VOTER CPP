@@ -1,97 +1,31 @@
-#include "party.h"
+#include "citizen.h"
+#include "Voter.h"
 
 
-char* Party::getName()
-{
-	return Name;
-}
-Party::Spectrum Party::getPolitical_spectrum()
-{
-	return Political_spectrum;
-}
-Establishment_Date Party::getDate()
-{
-	return Date;
-}
-Citizen* Party::getCitizen(int num)
-{
-	return Candidates[num];
-}
-Citizen**	Party::getCandidateList()
-{
-	return Candidates;
-}
 
 
-bool Party::setName(char* temp)
+Citizen Voter::getCivilian()
 {
-	int size = (strlen(temp) + 1);
-	if (size >= 2) {
-		Name = new char[size];
-		strcpy(Name, temp);
+	return civilian;
+}
+
+bool Voter::getVoted()
+{
+	return voted;
+}
+
+bool Voter::setCivilian(Citizen temp)
+{
+	if (strlen(temp.getName()) >= 1)
+	{
+		civilian = temp;
 		return true;
 	}
 	else return false;
 }
 
-bool Party::setPolitical_spectrum(Party::Spectrum temp)
+bool Voter::setVoted(bool temp)
 {
-	Political_spectrum = temp;
-	return true;
-}
-bool Party::setDate(Establishment_Date temp)
-{
-	if (((temp.getYear() >= 1 && temp.getYear() <= 2020)) && (temp.getMonth() >= 1 && temp.getMonth() <= 12)
-		&& (temp.getday() >= 1 && temp.getday() <= 31))
-	{
-		Date = temp;
-		return true;
-	}
-	else return false;
-}
-
-bool Party::isInCandidate(char* temp)
-{
-	for (int i = 0; i < log; i++)
-	{
-		if (strcmp(Candidates[i]->getID(), temp) == 0)
-			return true;
-		else return false;
-	}
-}
-
-bool Party::increaseList(Citizen** temp)
-{
-	phy *= 2;
-	Candidates = new Citizen*[phy];
-	Candidates = temp;
-	if (!Candidates)
-		return false;
-	return true;
-}
-
-bool Party::addCandidate(Citizen temp)
-{
-	if (log >= phy)
-	{
-		if (!(increaseList(Candidates)))
-			return false;
-	}
-	if (!isInCandidate(temp.getID()))
-	{
-		Candidates[log] = new Citizen;
-		*(Candidates[log]) = temp;
-		log++;
-		return true;
-	}
-	else return false;
-}
-bool Party::openCandidateList()
-{
-	log = 0;
-	phy = 2;
-	Candidates = new Citizen*[phy];
-	if (!Candidates)
-		return false;
+	voted = temp;
 	return true;
 }
