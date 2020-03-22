@@ -1,0 +1,21 @@
+#ifndef _VOTER_H
+#define _VOTER_H
+
+#include<iostream>
+#include"citizen.h"
+
+class Voter
+{
+private:
+	Citizen civilian;
+	bool voted;
+public:
+	Citizen getCivilian();
+	bool getVoted();
+
+	bool setCivilian(Citizen temp);
+	bool setVoted(bool temp);
+
+};
+
+#endif _VOTER_H
