@@ -1,0 +1,42 @@
+#include "establishment_date.h"
+
+int Establishment_Date::getYear()
+{
+	return year;
+}
+int Establishment_Date::getMonth()
+{
+	return month;
+}
+int Establishment_Date::getday()
+{
+	return day;
+}
+
+bool Establishment_Date::setYear(int temp)
+{
+	if (temp >= 1 && temp <= 2020)
+	{
+		year = temp;
+		return true;
+	}
+	else return false;
+}
+bool Establishment_Date::setMonth(int temp)
+{
+	if (temp >= 1 && temp <= 12)
+	{
+		month = temp;
+		return true;
+	}
+	else return false;
+}
+bool Establishment_Date::setDay(int temp)
+{
+	if (temp >= 1 && temp<=31)
+	{
+		day = temp;
+		return true;
+	}
+	else return false;
+}
