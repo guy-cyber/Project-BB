@@ -1,0 +1,36 @@
+#ifndef _BALLOT_H
+#define _BALLOT_H
+
+#include <iostream>
+using namespace std;
+
+#include "address.h"
+#include "voter.h"
+#include "citizen.h"
+class Ballot
+{
+private:
+	int id;
+	Address address;
+	Voter** voters;
+	float voters_precent;
+	int log;
+	int phy;
+	//results//
+public: int getID();
+		Address getAdress();
+		Voter** getVoters();
+		float getVoters_percent();
+
+
+		bool setID(int temp);
+		bool setAddress(Address temp);
+		bool CivCmp(Citizen a, Citizen b);
+		bool increaseList(Voter** temp);
+		bool addVoter(Voter temp);
+		bool openVotersListList();
+		bool isInVoters(Voter temp);
+};
+
+
+#endif // !_BALLOT_H
