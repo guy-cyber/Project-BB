@@ -60,8 +60,23 @@ bool Party::isInCandidate(char* temp)
 	}
 }
 
+bool Party::increaseList(Citizen** temp)
+{
+	phy *= 2;
+	Candidates = new Citizen*[phy];
+	Candidates = temp;
+	if (!Candidates)
+		return false;
+	return true;
+}
+
 bool Party::addCandidate(Citizen temp)
 {
+	if (log >= phy)
+	{
+		if (!(increaseList(Candidates)))
+			return false;
+	}
 	if (!isInCandidate(temp.getID()))
 	{
 		Candidates[log] = new Citizen;
