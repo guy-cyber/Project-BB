@@ -1,0 +1,71 @@
+#include "citizen.h"
+
+char* Citizen::getName()
+{
+	return Name;
+}
+
+char* Citizen::getID() 
+{
+	return id;
+}
+int  Citizen::getBirthYear()
+{
+	return BirthYear;
+}
+int  Citizen::getBallotID()
+{
+	return BallotId;
+}
+bool  Citizen:: getCandidate()
+{
+	return candidate;
+}
+
+bool  Citizen::setName(char* temp) 
+{
+	int size = (strlen(temp) + 1);
+	if (size >= 2) {
+		Name = new char[size];
+		strcpy(Name, temp);
+		return true;
+	}
+	else return false;
+}
+bool Citizen::setID(char* temp)
+{
+	int size = (strlen(temp) + 1);
+	if (size == 10)
+	{
+		strcpy(Name, temp);
+		return true;
+	}
+	else return false;
+}
+bool Citizen::setBirthday(int temp)
+{
+	if (temp < 1900 || temp>2020)return false;
+	else 
+	{
+		BirthYear = temp;
+		return true;
+	}
+}
+bool Citizen:: setBallotID(int temp)
+{
+	if (temp > 0) 
+	{
+		BallotId = temp;
+		return true;
+	}
+	else return false;
+}
+bool Citizen::setCandidate(char temp)
+{
+	if (temp == 'y')
+	{
+		candidate = true;
+		return true;
+	}
+	else return false;
+}
