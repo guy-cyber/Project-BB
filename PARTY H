@@ -1,0 +1,43 @@
+#ifndef _PARTY_H
+#define _PARTY_H
+
+#include <iostream>
+using namespace std;
+#include "establishment_date.h"
+#include "citizen.h"
+
+
+class Party
+{
+public:
+	enum Spectrum { LEFT, RIGHT, CENTER };
+
+	char* getName();
+	Party::Spectrum getPolitical_spectrum();
+	Establishment_Date getDate();
+	Citizen* getCitizen(int num);
+	Citizen** getCandidateList();
+
+	bool isInCandidate(char* temp);
+	
+
+	bool setName(char* temp);
+	bool setPolitical_spectrum(Spectrum temp);
+	bool setDate(Establishment_Date temp);
+	bool isInCandidate(char* temp);
+	bool addCandidate(Citizen temp);
+	bool openCandidateList();
+	
+private:
+	char* Name;
+	Spectrum Political_spectrum;
+	Establishment_Date Date;
+	Citizen** Candidates;
+	int log ;
+	int phy ;
+	
+};
+
+
+#endif // !_PARTY_H
+
