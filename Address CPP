@@ -1,0 +1,45 @@
+#include "address.h"
+
+
+char* Address::getCity() 
+{
+	return City;
+}
+char* Address::getStreet()
+{
+	return Street;
+}
+int Address::getHouse_Number()
+{
+	return House_Number;
+}
+
+bool Address::setCity(char* temp)
+{
+	int size = (strlen(temp) + 1);
+	if (size >= 2) {
+		City = new char[size];
+		strcpy(City, temp);
+		return true;
+	}
+	else return false;
+}
+bool Address::setStreet(char* temp)
+{
+	int size = (strlen(temp) + 1);
+	if (size >= 2) {
+		Street = new char[size];
+		strcpy(Street, temp);
+		return true;
+	}
+	else return false;
+}
+bool Address::setHouse_Number(int temp)
+{
+	if (temp >= 1)
+	{
+		House_Number = temp;
+		return true;
+	}
+	else return false;
+}
