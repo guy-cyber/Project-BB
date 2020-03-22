@@ -1,0 +1,33 @@
+#ifndef _CITIZEN_H
+#define _CITIZEN_H
+
+#include <iostream>
+using namespace std;
+class Citizen
+{
+private:
+	char* Name;
+	char id[10];
+	int BirthYear;
+	int BallotId;
+	bool candidate;
+public:
+	char* getName();
+	char* getID();
+	int getBirthYear();
+	int getBallotID();
+	bool getCandidate();
+
+	bool setName(char* temp);
+	bool setID(char* temp);
+	bool setBirthday(int temp);
+	bool setBallotID(int temp);
+	bool setCandidate(char temp);
+};
+
+
+
+#endif // !_CITIZEN_H
+
+
+
