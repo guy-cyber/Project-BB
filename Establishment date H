@@ -1,0 +1,27 @@
+#ifndef _ESTABLISHMENT_DATE_H
+#define _ESTABLISHMENT_DATE_H
+
+#include <iostream>
+using namespace std;
+
+class Establishment_Date
+{
+private:
+	int year;
+	int month;
+	int day;
+
+public:
+	int getYear();
+	int getMonth();
+	int getday();
+
+	bool setYear(int temp);
+	bool setMonth(int temp);
+	bool setDay(int temp);
+};
+
+
+
+
+#endif // !_ESTABLISHMENT_DATE_H
