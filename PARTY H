@@ -25,6 +25,7 @@ public:
 	bool setPolitical_spectrum(Spectrum temp);
 	bool setDate(Establishment_Date temp);
 	bool isInCandidate(char* temp);
+	bool increaseList(Citizen** temp);
 	bool addCandidate(Citizen temp);
 	bool openCandidateList();
 	
