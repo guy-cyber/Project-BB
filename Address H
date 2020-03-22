@@ -1,0 +1,28 @@
+#ifndef _ADDRESS_H
+#define _ADDRESS_H
+
+#include <iostream>
+using namespace std;
+
+
+class Address
+{
+private:
+	char* City;
+	char* Street;
+	int House_Number;
+public:
+	char* getCity();
+	char* getStreet();
+	int getHouse_Number();
+
+	bool setCity(char* temp);
+	bool setStreet(char* temp);
+	bool setHouse_Number(int temp);
+	
+
+};
+
+
+
+#endif // !
