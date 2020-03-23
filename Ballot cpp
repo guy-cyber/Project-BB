@@ -43,8 +43,8 @@ bool Ballot::setAddress(Address temp)
 }
 bool Ballot::increaseList(Voter** temp)
 {
-	phy *= 2;
-	voters = new Voter *[phy];
+	phyVoters *= 2;
+	voters = new Voter *[phyVoters];
 	voters = temp;
 	if (!voters)
 		return false;
@@ -53,42 +53,36 @@ bool Ballot::increaseList(Voter** temp)
 //check if the citizen is already inside the voters array
 bool Ballot::isInVoters(Citizen temp)
 {
-	for (int i = 0; i < log; i++)
+	for (int i = 0; i < logVoters; i++)
 	{
-		if (CivCmp(voters[i]->getCivilian, temp))
+		if (strcmp(voters[i]->getCivilian().getID(),temp.getID) == 0)
 			return true;
 		else return false;
 	}
 }
-//compare the citizens id
-bool Ballot::CivCmp(Citizen a, Citizen b)
-{
-	if (strcmp(a.getID, b.getID) == 0)
-		return true;
-	else return false;
-}
+
 bool Ballot::addVoter(Citizen temp)
 {
-	if (log >= phy)
+	if (logVoters >= phyVoters)
 	{
 		if (!(increaseList(voters)))
 			return false;
 	}
 	if (!isInVoters(temp))
 	{
-		voters[log] = new Voter;
-		*(voters[log])->setCivilian = temp;
-		*(voters[log])->setVoted = false;
-		log++;
+		voters[logVoters] = new Voter;
+		*(voters[logVoters])->setCivilian = temp;
+		*(voters[logVoters])->setVoted = false;
+		logVoters++;
 		return true;
 	}
 	else return false;
 }
 bool Ballot::openVotersListList()
 {
-	log = 0;
-	phy = 2;
-	voters = new Voter *[phy];
+	logVoters = 0;
+	phyVoters = 2;
+	voters = new Voter *[phyVoters];
 	if (!voters)
 		return false;
 	return true;
@@ -99,11 +93,47 @@ float Ballot::calculateVoterPercent()
 {
 	int sum = 0;
 	int i;
-	for (i = 0; i < log; i++);
+	for (i = 0; i < logVoters; i++);
 	{
 		if (getVoter(i).getVoted())
 			sum++;
 	}
-	voters_precent = sum / log;
+	voters_precent = sum / logVoters;
 	return voters_precent;
+}
+
+int Ballot::getSumVotes(int i)
+{
+	return sumVotes[i];
+}
+
+bool Ballot::addVote(int i)
+{
+	if (i < phyVoters)
+	{
+		sumVotes[i]++;
+		return true;
+	}
+	return false;
+}
+
+bool Ballot::openSumVotes()
+{
+	sumVotes = new int[phySumVoters];
+	int i;
+	if (!sumVotes)
+		return false;
+	for (i = 0; i < phySumVoters; i++)
+		sumVotes[i] = 0;
+	return true;
+
+}
+
+bool Ballot::setPhySumVoters(int size)
+{
+	if (size > 0)
+	{
+		phySumVoters = size;
+	}
+	else return false;
 }
