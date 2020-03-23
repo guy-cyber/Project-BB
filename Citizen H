@@ -2,6 +2,8 @@
 #define _CITIZEN_H
 
 #include <iostream>
+#include "Ballot.h"
+
 using namespace std;
 class Citizen
 {
@@ -9,25 +11,28 @@ private:
 	char* Name;
 	char id[10];
 	int BirthYear;
-	int BallotId;
+	Ballot* ballot;
 	bool candidate;
 public:
 	char* getName();
 	char* getID();
 	int getBirthYear();
-	int getBallotID();
+	Ballot& getBallotID();
 	bool getCandidate();
 
 	bool setName(char* temp);
 	bool setID(char* temp);
 	bool setBirthday(int temp);
-	bool setBallotID(int temp);
+	bool setBallot(Ballot* temp);
 	bool setCandidate(char temp);
 };
 
 
 
 #endif // !_CITIZEN_H
+
+
+
 
 
 
