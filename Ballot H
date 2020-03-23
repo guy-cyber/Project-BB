@@ -20,6 +20,7 @@ private:
 public: int getID();
 		Address getAdress();
 		Voter** getVoters();
+		Voter getVoter(int i);
 		float getVoters_percent();
 
 
@@ -27,9 +28,10 @@ public: int getID();
 		bool setAddress(Address temp);
 		bool CivCmp(Citizen a, Citizen b);
 		bool increaseList(Voter** temp);
-		bool addVoter(Voter temp);
+		bool addVoter(Citizen temp);
 		bool openVotersListList();
-		bool isInVoters(Voter temp);
+		bool isInVoters(Citizen temp);
+		float calculateVoterPercent();
 };
 
 
