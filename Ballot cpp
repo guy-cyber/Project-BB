@@ -137,3 +137,8 @@ bool Ballot::setPhySumVoters(int size)
 	}
 	else return false;
 }
+
+int Ballot::getLogVoters()
+{
+	return logVoters;
+}
