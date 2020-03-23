@@ -13,9 +13,9 @@ int  Citizen::getBirthYear()
 {
 	return BirthYear;
 }
-int  Citizen::getBallotID()
+Ballot&  Citizen::getBallotID()
 {
-	return BallotId;
+	return *ballot;
 }
 bool  Citizen:: getCandidate()
 {
@@ -51,11 +51,11 @@ bool Citizen::setBirthday(int temp)
 		return true;
 	}
 }
-bool Citizen:: setBallotID(int temp)
+bool Citizen::setBallot(Ballot* temp)
 {
-	if (temp > 0) 
+	if (temp->getID() > 0) 
 	{
-		BallotId = temp;
+		ballot = temp;
 		return true;
 	}
 	else return false;
