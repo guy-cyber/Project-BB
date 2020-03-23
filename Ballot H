@@ -13,25 +13,30 @@ private:
 	int id;
 	Address address;
 	Voter** voters;
+	int* sumVotes;
 	float voters_precent;
-	int log;
-	int phy;
+	int logVoters;
+	int phyVoters;
+	int phySumVoters;
 	//results//
 public: int getID();
 		Address getAdress();
 		Voter** getVoters();
 		Voter getVoter(int i);
 		float getVoters_percent();
+		int getSumVotes(int i);
+		
 
-
+		bool setPhySumVoters(int size);
 		bool setID(int temp);
 		bool setAddress(Address temp);
-		bool CivCmp(Citizen a, Citizen b);
 		bool increaseList(Voter** temp);
 		bool addVoter(Citizen temp);
 		bool openVotersListList();
 		bool isInVoters(Citizen temp);
 		float calculateVoterPercent();
+		bool openSumVotes();
+		bool addVote(int i);
 };
 
 
