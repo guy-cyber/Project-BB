@@ -12,6 +12,11 @@ Voter** Ballot::getVoters()
 {
 	return voters;
 }
+
+Voter Ballot::getVoter(int i)
+{
+	return *(voters[i]);
+}
 float Ballot::getVoters_percent()
 {
 	return voters_precent;
@@ -46,11 +51,11 @@ bool Ballot::increaseList(Voter** temp)
 	return true;
 }
 //check if the citizen is already inside the voters array
-bool Ballot::isInVoters(Voter temp)
+bool Ballot::isInVoters(Citizen temp)
 {
 	for (int i = 0; i < log; i++)
 	{
-		if (CivCmp(voters[i]->getCivilian, temp.getCivilian))
+		if (CivCmp(voters[i]->getCivilian, temp))
 			return true;
 		else return false;
 	}
@@ -62,7 +67,7 @@ bool Ballot::CivCmp(Citizen a, Citizen b)
 		return true;
 	else return false;
 }
-bool Ballot::addVoter(Voter temp)
+bool Ballot::addVoter(Citizen temp)
 {
 	if (log >= phy)
 	{
@@ -72,7 +77,8 @@ bool Ballot::addVoter(Voter temp)
 	if (!isInVoters(temp))
 	{
 		voters[log] = new Voter;
-		*(voters[log]) = temp;
+		*(voters[log])->setCivilian = temp;
+		*(voters[log])->setVoted = false;
 		log++;
 		return true;
 	}
@@ -86,4 +92,18 @@ bool Ballot::openVotersListList()
 	if (!voters)
 		return false;
 	return true;
+}
+
+
+float Ballot::calculateVoterPercent()
+{
+	int sum = 0;
+	int i;
+	for (i = 0; i < log; i++);
+	{
+		if (getVoter(i).getVoted())
+			sum++;
+	}
+	voters_precent = sum / log;
+	return voters_precent;
 }
