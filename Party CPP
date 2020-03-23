@@ -56,8 +56,8 @@ bool Party::isInCandidate(char* temp)
 	{
 		if (strcmp(Candidates[i]->getID(), temp) == 0)
 			return true;
-		else return false;
 	}
+	return false;
 }
 
 bool Party::increaseList(Citizen** temp)
@@ -94,4 +94,15 @@ bool Party::openCandidateList()
 	if (!Candidates)
 		return false;
 	return true;
+}
+
+
+void Party::addVote()
+{
+	sumVoted++;
+}
+
+int Party::getSumVoted()
+{
+	return sumVoted;
 }
