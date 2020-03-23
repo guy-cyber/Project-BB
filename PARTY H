@@ -17,6 +17,7 @@ public:
 	Establishment_Date getDate();
 	Citizen* getCitizen(int num);
 	Citizen** getCandidateList();
+	int getSumVoted();
 
 	bool isInCandidate(char* temp);
 	
@@ -28,12 +29,14 @@ public:
 	bool increaseList(Citizen** temp);
 	bool addCandidate(Citizen temp);
 	bool openCandidateList();
+	void addVote();
 	
 private:
 	char* Name;
 	Spectrum Political_spectrum;
 	Establishment_Date Date;
 	Citizen** Candidates;
+	int sumVoted;
 	int log ;
 	int phy ;
 	
@@ -41,4 +44,5 @@ private:
 
 
 #endif // !_PARTY_H
+
 
