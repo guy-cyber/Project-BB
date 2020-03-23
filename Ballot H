@@ -25,6 +25,7 @@ public: int getID();
 		Voter getVoter(int i);
 		float getVoters_percent();
 		int getSumVotes(int i);
+		int getLogVoters();
 		
 
 		bool setPhySumVoters(int size);
