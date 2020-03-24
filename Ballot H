@@ -6,7 +6,9 @@ using namespace std;
 
 #include "address.h"
 #include "voter.h"
-#include "citizen.h"
+
+class citizen;
+
 class Ballot
 {
 private:
@@ -20,24 +22,26 @@ private:
 	int phySumVoters;
 	//results//
 public: int getID();
-		Address getAdress();
+		Address getAddress();
 		Voter** getVoters();
-		Voter getVoter(int i);
+		Voter getVoter(const int& i);
 		float getVoters_percent();
-		int getSumVotes(int i);
+		int getSumVotes(const int& i);
 		int getLogVoters();
 		
 
-		bool setPhySumVoters(int size);
-		bool setID(int temp);
-		bool setAddress(Address temp);
+		bool setPhySumVoters(const int& size);
+		bool setID(const int & temp);
+		bool setAddress(const Address& temp);
 		bool increaseList(Voter** temp);
-		bool addVoter(Citizen temp);
+		bool addVoter(const Citizen& temp);
 		bool openVotersListList();
-		bool isInVoters(Citizen temp);
+		bool isInVoters(const Citizen& temp);
 		float calculateVoterPercent();
 		bool openSumVotes();
-		bool addVote(int i);
+		bool addVote(const int& i);
+
+		void showBallot();
 };
 
 
