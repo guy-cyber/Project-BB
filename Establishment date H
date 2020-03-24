@@ -16,9 +16,12 @@ public:
 	int getMonth();
 	int getday();
 
-	bool setYear(int temp);
-	bool setMonth(int temp);
-	bool setDay(int temp);
+	bool setYear(const int& temp);
+	bool setMonth(const int& temp);
+	bool setDay(const int& temp);
+
+	void showEstablismentDate();
+
 };
 
 
