@@ -13,7 +13,7 @@ int Establishment_Date::getday()
 	return day;
 }
 
-bool Establishment_Date::setYear(int temp)
+bool Establishment_Date::setYear(const int& temp)
 {
 	if (temp >= 1 && temp <= 2020)
 	{
@@ -22,7 +22,7 @@ bool Establishment_Date::setYear(int temp)
 	}
 	else return false;
 }
-bool Establishment_Date::setMonth(int temp)
+bool Establishment_Date::setMonth(const int& temp)
 {
 	if (temp >= 1 && temp <= 12)
 	{
@@ -31,7 +31,7 @@ bool Establishment_Date::setMonth(int temp)
 	}
 	else return false;
 }
-bool Establishment_Date::setDay(int temp)
+bool Establishment_Date::setDay(const int& temp)
 {
 	if (temp >= 1 && temp<=31)
 	{
@@ -39,4 +39,10 @@ bool Establishment_Date::setDay(int temp)
 		return true;
 	}
 	else return false;
+}
+
+void Establishment_Date::showEstablismentDate()
+{
+	cout << getday() << "." << getMonth() << "." << getYear() <<
+		endl;
 }
