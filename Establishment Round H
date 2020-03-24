@@ -1,0 +1,65 @@
+#ifndef _ELECTIONROUND_H
+#define _ELECTIONROUND_H
+
+#include<iostream>
+#include "citizen.h"
+#include "address.h"
+#include "Ballot.h"
+#include "establishment_date.h"
+#include "party.h"
+#include "Voter.h"
+
+class ElectionRound
+{
+
+private:
+	int year;
+	int month;
+	int logVoters;
+	int phyVoters;
+	int logParties;
+	int phyParties;
+	int logBallots;
+	int phyBallots;
+
+	Voter** voters;
+	Party** parties;
+	Ballot** ballots;
+
+public:
+	int getyear();
+	int getmonth();
+
+	
+
+
+	bool openElctionround(const int& month,const int& year);
+
+	bool openPartiesList();
+	bool isInParties(char* temp);
+	bool increasePartiesList(Party** temp);
+	bool addParty(char* TempName,Establishment_Date& tempDate,const int& tempSpectrum);
+
+	bool openBallotList();
+	bool isInBallots(const int& temp);
+	bool increaseBallotsList(Ballot** temp);
+	bool addBallot(const int& TempID,const Address& TempAddres);
+
+	bool openVotersList();
+	bool isInVoters(char* temp);
+	bool increaseVoterList(Voter** temp);
+	bool addVoter(Citizen& temp,const int& partyIndex);
+
+	Citizen creatCitizen(char* tempName, char* tempID,const int& tempYear,Ballot* tempBallote,const bool& tempCandidate);
+
+	void showAllCivilans();
+	void showAllParties();
+	void showAllBallots();
+
+	void startElection();
+};
+
+
+
+
+#endif _ELEC
