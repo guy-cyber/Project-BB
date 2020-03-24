@@ -14,7 +14,7 @@ bool Voter::getVoted()
 	return voted;
 }
 
-bool Voter::setCivilian(Citizen temp)
+bool Voter::setCivilian(Citizen& temp)
 {
 	if (strlen(temp.getName()) >= 1)
 	{
@@ -24,8 +24,16 @@ bool Voter::setCivilian(Citizen temp)
 	else return false;
 }
 
-bool Voter::setVoted(bool temp)
+bool Voter::setVoted(const bool& temp)
 {
 	voted = temp;
 	return true;
+}
+
+void Voter::showVoter()
+{
+	getCivilian().ShowCivilian();
+	if (!getVoted())
+		cout << "Did not vote " << endl;
+	else cout << "Voted" << endl;
 }
