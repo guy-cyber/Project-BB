@@ -1,8 +1,13 @@
+#pragma once
+
 #ifndef _CITIZEN_H
 #define _CITIZEN_H
 
+
 #include <iostream>
 #include "Ballot.h"
+
+class Ballot;
 
 using namespace std;
 class Citizen
@@ -17,20 +22,21 @@ public:
 	char* getName();
 	char* getID();
 	int getBirthYear();
-	Ballot& getBallotID();
+	Ballot* getBallot();
 	bool getCandidate();
 
 	bool setName(char* temp);
 	bool setID(char* temp);
-	bool setBirthday(int temp);
+	bool setBirthday(const int& temp);
 	bool setBallot(Ballot* temp);
-	bool setCandidate(char temp);
+	void setCandidate(const bool& temp);
+
+	void ShowCivilian();
 };
 
 
 
 #endif // !_CITIZEN_H
-
 
 
 
