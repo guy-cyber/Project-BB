@@ -1,0 +1,246 @@
+#include "ElectionRoundh.h"
+
+int ElectionRound::getyear()
+{
+	return year;
+}
+int ElectionRound::getmonth()
+{
+	return month;
+}
+
+bool ElectionRound::openElctionround(const int& tempMonth,const int& tempYear) {
+	if (tempMonth < 1 || tempMonth>12)return false;
+	if (tempYear < 1990)return false;
+	else {
+		year = tempYear;
+		month = tempMonth;
+		if (!(openVotersList()))
+			return false;
+		if (!(openBallotList()))
+			return false;
+		if (!(openPartiesList()))
+			return false;
+		
+		//openPArty
+	}
+}
+
+
+bool ElectionRound::isInVoters(char* temp)
+{
+	for (int i = 0; i < logVoters; i++)
+	{
+		if (strcmp(voters[i]->getCivilian().getID(), temp))
+			return true;
+	}
+	return false;
+}
+bool ElectionRound::increaseVoterList(Voter** temp)
+{
+	phyVoters *= 2;
+	voters = new Voter *[phyVoters];
+	voters = temp;
+	if (!voters)
+		return false;
+	return true;
+}
+bool ElectionRound::addVoter(Citizen& temp,const int& partyIndex)
+{
+	if (logVoters >= phyVoters)
+	{
+		if (!(increaseVoterList(voters)))
+			return false;
+	}
+	if (!isInVoters(temp.getID()))
+	{
+		voters[logVoters] = new Voter;
+		if (!voters[logVoters]->setCivilian(temp))
+			return false;
+		if (!voters[logVoters]->setVoted(false))
+			return false;
+		
+		if (temp.getCandidate())
+		{
+			//addCandidate()
+			parties[partyIndex]->addCandidate(temp);
+		}
+		logVoters++;
+		return true;
+	}
+	else return false;
+}
+bool ElectionRound::openVotersList()
+{
+	logVoters = 0;
+	phyVoters = 2;
+	voters = new Voter *[phyVoters];
+	if (!voters)
+		return false;
+	return true;
+}
+
+
+
+bool ElectionRound::isInBallots(const int& temp)
+{
+	for (int i = 0; i < logBallots; i++)
+	{
+		if (ballots[i]->getID() == temp)
+			return true;
+	}
+	return false;
+}
+bool ElectionRound::increaseBallotsList(Ballot** temp)
+{
+	phyBallots *= 2;
+	ballots = new Ballot *[phyBallots];
+	ballots = temp;
+	if (!ballots)
+		return false;
+	return true;
+}
+bool ElectionRound::addBallot(const int& TempID,const Address& TempAddres)
+{
+	if (logBallots >= phyBallots)
+	{
+		if (!(increaseBallotsList(ballots)))
+			return false;
+	}
+	if (!isInBallots(TempID))
+	{
+		ballots[logBallots] = new Ballot;
+		if (!ballots[logBallots]->setID(TempID))
+			return false;
+		if (!ballots[logBallots]->setAddress(TempAddres))
+			return false;
+		logBallots++;
+		return true;
+	}
+	else return false;
+}
+bool ElectionRound::openBallotList()
+{
+	logBallots = 0;
+	phyBallots = 2;
+	ballots = new Ballot*[phyBallots];
+	if (!ballots)
+		return false;
+	return true;
+}
+
+bool ElectionRound::isInParties(char* temp)
+{
+	for (int i = 0; i < logParties; i++)
+	{
+		if (strcmp(parties[i]->getName(), temp) == 0)
+			return true;
+
+	}
+	return false;
+}
+bool ElectionRound::increasePartiesList(Party** temp)
+{
+	phyParties *= 2;
+	parties = new Party *[phyParties];
+	parties = temp;
+	if (!parties)
+		return false;
+	return true;
+}
+bool ElectionRound::addParty(char* TempName,Establishment_Date& tempDate,const int& tempSpectrum)
+{
+	if (logParties >= phyParties)
+	{
+		if (!(increasePartiesList(parties)))
+			return false;
+	}
+	if (!isInParties(TempName))
+	{
+		parties[logParties] = new Party;
+		if (!(parties[logParties])->setName(TempName))
+			return false;
+		if (!(parties[logParties]->setDate(tempDate)))
+			return false;
+		if (!(parties[logParties]->setPolitical_spectrum((Party::Spectrum)tempSpectrum)))
+			return false;
+		logParties++;
+		return true;
+	}
+	else return false;
+}
+bool ElectionRound::openPartiesList()
+{
+	logParties = 0;
+	phyParties = 2;
+	parties = new Party *[phyBallots];
+	if (!parties)
+		return false;
+	return true;
+}
+
+Citizen ElectionRound::creatCitizen(char* tempName, char* tempID,const int& tempYear, Ballot*
+	tempBallot,const bool& tempCandidate)
+{
+	Citizen citizen;
+	if (!(citizen.setName(tempName)))
+		exit(0);
+	if (!(citizen.setID(tempID)))
+		exit(0);
+	if (!(citizen.setBirthday(tempYear)))
+		exit(0);
+	if (!(citizen.setBallot(tempBallot)))
+		exit(0);
+	citizen.setCandidate(tempCandidate);
+
+	return citizen;
+}
+
+void ElectionRound::startElection()
+{
+	int i, j, k;
+
+
+	for (i = 0; i <= logBallots; i++)
+	{
+		if (!(ballots[i]->setPhySumVoters(logParties)))
+			exit(0);
+		if (!(ballots[i]->openSumVotes()))
+			exit(0);
+		for (j = 0; j < ballots[i]->getLogVoters(); j++)
+		{
+
+		}
+	}
+}
+
+
+void ElectionRound::showAllCivilans()
+{
+	cout << "All the registerd citizens: " << endl;
+	for (int i = 0; i < logVoters; i++)
+	{
+		cout << i + 1 << ": " << endl;
+		voters[i]->getCivilian().ShowCivilian();
+	}
+}
+
+void ElectionRound::showAllParties()
+{
+	cout << "All the parties data: " << endl;
+	for (int i = 0; i < logParties; i++)
+	{
+		cout << i + 1 << ": " << endl;
+		parties[i]->showParty();
+	}
+}
+
+void ElectionRound::showAllBallots()
+{
+	cout << "All the parties data: " << endl;
+	for (int i = 0; i < logBallots; i++)
+	{
+		cout << i + 1 << ": " << endl;
+		ballots[i]->showBallot();
+	}
+}
