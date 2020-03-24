@@ -18,9 +18,9 @@ public:
 
 	bool setCity(char* temp);
 	bool setStreet(char* temp);
-	bool setHouse_Number(int temp);
+	bool setHouse_Number(const int& temp);
 	
-
+	void showAddress();
 };
 
 
