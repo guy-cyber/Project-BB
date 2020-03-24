@@ -13,9 +13,9 @@ int  Citizen::getBirthYear()
 {
 	return BirthYear;
 }
-Ballot&  Citizen::getBallotID()
+Ballot*  Citizen::getBallot()
 {
-	return *ballot;
+	return ballot;
 }
 bool  Citizen:: getCandidate()
 {
@@ -42,7 +42,7 @@ bool Citizen::setID(char* temp)
 	}
 	else return false;
 }
-bool Citizen::setBirthday(int temp)
+bool Citizen::setBirthday(const int& temp)
 {
 	if (temp < 1900 || temp>2020)return false;
 	else 
@@ -60,12 +60,13 @@ bool Citizen::setBallot(Ballot* temp)
 	}
 	else return false;
 }
-bool Citizen::setCandidate(char temp)
+void Citizen::setCandidate(const bool& temp)
 {
-	if (temp == 'y')
-	{
-		candidate = true;
-		return true;
-	}
-	else return false;
+	candidate = temp;
+}
+
+void Citizen::ShowCivilian()
+{
+	cout << "Name: " << getName() << endl << " ID Number: " << getID() << endl
+		<< " Birth Year: " << getBirthYear() << endl << "Ballot ID: " << getBallot()->getID() << endl;
 }
