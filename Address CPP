@@ -34,7 +34,7 @@ bool Address::setStreet(char* temp)
 	}
 	else return false;
 }
-bool Address::setHouse_Number(int temp)
+bool Address::setHouse_Number(const int& temp)
 {
 	if (temp >= 1)
 	{
@@ -42,4 +42,12 @@ bool Address::setHouse_Number(int temp)
 		return true;
 	}
 	else return false;
+}
+
+void Address::showAddress()
+{
+	cout << "City: " << getCity() << endl <<
+		"Street: " << getStreet() << "  " << getHouse_Number() <<
+		endl;
+
 }
