@@ -4,7 +4,7 @@ int Ballot::getID()
 {
 	return id;
 }
-Address Ballot::getAdress()
+Address Ballot::getAddress()
 {
 	return address;
 }
@@ -13,7 +13,7 @@ Voter** Ballot::getVoters()
 	return voters;
 }
 
-Voter Ballot::getVoter(int i)
+Voter Ballot::getVoter(const int& i)
 {
 	return *(voters[i]);
 }
@@ -23,7 +23,7 @@ float Ballot::getVoters_percent()
 }
 
 
-bool Ballot::setID(int temp)
+bool Ballot::setID(const int& temp)
 {
 	if (temp > 0)
 	{
@@ -32,7 +32,7 @@ bool Ballot::setID(int temp)
 	}
 	else return false;
 }
-bool Ballot::setAddress(Address temp)
+bool Ballot::setAddress(const Address& temp)
 {
 	if ((strlen(temp.getCity) > 1) && (temp.getHouse_Number > 0) &&
 		(strlen(temp.getStreet) > 0)) {
@@ -51,7 +51,7 @@ bool Ballot::increaseList(Voter** temp)
 	return true;
 }
 //check if the citizen is already inside the voters array
-bool Ballot::isInVoters(Citizen temp)
+bool Ballot::isInVoters(const Citizen& temp)
 {
 	for (int i = 0; i < logVoters; i++)
 	{
@@ -61,7 +61,7 @@ bool Ballot::isInVoters(Citizen temp)
 	}
 }
 
-bool Ballot::addVoter(Citizen temp)
+bool Ballot::addVoter(const Citizen& temp)
 {
 	if (logVoters >= phyVoters)
 	{
@@ -102,12 +102,12 @@ float Ballot::calculateVoterPercent()
 	return voters_precent;
 }
 
-int Ballot::getSumVotes(int i)
+int Ballot::getSumVotes(const int& i)
 {
 	return sumVotes[i];
 }
 
-bool Ballot::addVote(int i)
+bool Ballot::addVote(const int& i)
 {
 	if (i < phyVoters)
 	{
@@ -129,7 +129,7 @@ bool Ballot::openSumVotes()
 
 }
 
-bool Ballot::setPhySumVoters(int size)
+bool Ballot::setPhySumVoters(const int& size)
 {
 	if (size > 0)
 	{
@@ -141,4 +141,17 @@ bool Ballot::setPhySumVoters(int size)
 int Ballot::getLogVoters()
 {
 	return logVoters;
+}
+
+void Ballot::showBallot()
+{
+	cout << "ID number: " << getID() << endl << "Addrees:" << endl;
+	getAddress().showAddress();
+	cout << "Number of voters: " << getLogVoters() << endl;
+	cout << "Voters data:" << endl;
+	for (int i = 0; i < logVoters ; i++)
+	{
+		cout << i + 1 << ":" << endl;
+		getVoter(i).getCivilian().ShowCivilian();
+	}
 }
