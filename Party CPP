@@ -28,7 +28,7 @@ bool Party::setName(char* temp)
 	int size = (strlen(temp) + 1);
 	if (size >= 2) {
 		Name = new char[size];
-		strcpy(Name, temp);
+		strcpy_s(Name,size, temp);
 		return true;
 	}
 	else return false;
