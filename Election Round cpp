@@ -9,6 +9,45 @@ int ElectionRound::getmonth()
 	return month;
 }
 
+int ElectionRound::getlogVoters()
+{
+	return logVoters;
+}
+int ElectionRound::getphyVoters()
+{
+	return phyVoters;
+}
+int ElectionRound::getlogParties()
+{
+	return logParties;
+}
+int ElectionRound::getphyParties()
+{
+	return phyParties;
+}
+int ElectionRound::getlogBallots()
+{
+	return logBallots;
+}
+int ElectionRound::getphyBallots()
+{
+	return phyBallots;
+}
+
+Voter** ElectionRound::getvoters()
+{
+	return voters;
+}
+Party** ElectionRound::getparties()
+{
+	return parties;
+}
+Ballot** ElectionRound::getballots()
+{
+	return ballots;
+}
+
+
 bool ElectionRound::openElctionround(const int& tempMonth,const int& tempYear) {
 	if (tempMonth < 1 || tempMonth>12)return false;
 	if (tempYear < 1990)return false;
@@ -31,7 +70,7 @@ bool ElectionRound::isInVoters(char* temp)
 {
 	for (int i = 0; i < logVoters; i++)
 	{
-		if (strcmp(voters[i]->getCivilian().getID(), temp))
+		if (strcmp(voters[i]->getCivilian().getID(), temp) == 0)
 			return true;
 	}
 	return false;
@@ -45,7 +84,7 @@ bool ElectionRound::increaseVoterList(Voter** temp)
 		return false;
 	return true;
 }
-bool ElectionRound::addVoter(Citizen& temp,const int& partyIndex)
+bool ElectionRound::addVoter(Citizen& temp, const int& partyIndex)
 {
 	if (logVoters >= phyVoters)
 	{
@@ -59,7 +98,7 @@ bool ElectionRound::addVoter(Citizen& temp,const int& partyIndex)
 			return false;
 		if (!voters[logVoters]->setVoted(false))
 			return false;
-		
+		temp.getBallot()->addVoter((voters[logVoters]->getCivilian()));
 		if (temp.getCandidate())
 		{
 			//addCandidate()
@@ -100,7 +139,7 @@ bool ElectionRound::increaseBallotsList(Ballot** temp)
 		return false;
 	return true;
 }
-bool ElectionRound::addBallot(const int& TempID,const Address& TempAddres)
+bool ElectionRound::addBallot(const int& TempID,Address& TempAddres)
 {
 	if (logBallots >= phyBallots)
 	{
@@ -110,6 +149,10 @@ bool ElectionRound::addBallot(const int& TempID,const Address& TempAddres)
 	if (!isInBallots(TempID))
 	{
 		ballots[logBallots] = new Ballot;
+		if (!ballots[logBallots]->openVotersListList())
+			return false;
+		if (!ballots[logBallots]->openSumVotes(phyParties))
+			return false;
 		if (!ballots[logBallots]->setID(TempID))
 			return false;
 		if (!ballots[logBallots]->setAddress(TempAddres))
@@ -196,23 +239,6 @@ Citizen ElectionRound::creatCitizen(char* tempName, char* tempID,const int& temp
 	return citizen;
 }
 
-void ElectionRound::startElection()
-{
-	int i, j, k;
-
-
-	for (i = 0; i <= logBallots; i++)
-	{
-		if (!(ballots[i]->setPhySumVoters(logParties)))
-			exit(0);
-		if (!(ballots[i]->openSumVotes()))
-			exit(0);
-		for (j = 0; j < ballots[i]->getLogVoters(); j++)
-		{
-
-		}
-	}
-}
 
 
 void ElectionRound::showAllCivilans()
@@ -237,10 +263,66 @@ void ElectionRound::showAllParties()
 
 void ElectionRound::showAllBallots()
 {
-	cout << "All the parties data: " << endl;
+	cout << "All the ballots data: " << endl;
 	for (int i = 0; i < logBallots; i++)
 	{
-		cout << i + 1 << ": " << endl;
+		cout << (i + 1) << ": " << endl;
 		ballots[i]->showBallot();
 	}
+}
+
+void ElectionRound::startElection()
+{
+	char vote; int partyNumber;
+	//run over all the citizens
+	for (int i = 0; i < logBallots; i++)
+	{
+		for (int k = 0; k < ballots[i]->getLogVoters(); k++) {
+
+
+			cout << "Dear " << ballots[i]->getVoters()[k]->getCivilian().getName() << ", Do you want to vote?"
+				<< "if you do, write Y else write N :";
+			cin >> vote;
+			//if the citizien want to vote
+			if (vote == 'Y')
+			{
+				cout << "Well done! it is super importent to vote!" << endl <<
+					"what is the party you want to vote for?" << endl <<
+					"insert number of party" << endl;
+				//present all the paries that participate
+				for (int j = 0; j < logParties; j++)
+				{
+					cout << (j + 1) << ". " << parties[j]->getName() << endl;
+				}
+				cin >> partyNumber;
+
+				ballots[i]->getVoters()[k]->setVoted(true); //change that citizen voted
+				parties[partyNumber - 1]->addVote(); // add vote to the party
+				ballots[i]->addVote(partyNumber - 1);  //add a vote in the specific ballot
+
+			}
+
+		}
+	}
+}
+
+void ElectionRound::showResults()
+{
+	for (int i = 0; i < logBallots; i++)
+	{
+		cout << "Results of ballot number(by ID) " << ballots[i]->getID() << "are: " << endl;
+		for (int j = 0; j < logParties; j++)
+		{
+			cout << parties[j]->getName() << " = " << ballots[i]->getSumVotes()[j] <<
+				endl;
+		}
+
+	}
+	cout << "and in total: " << endl;
+	for (int i = 0; i < logParties; i++)
+	{
+		cout << parties[i]->getName() << ":  " << parties[i]->getSumVoted() <<
+			endl;
+	}
+
 }
