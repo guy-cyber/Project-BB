@@ -19,8 +19,6 @@ public:
 	Citizen* getCitizen(const int& num);
 	Citizen** getCandidateList();
 	int getSumVoted();
-
-	bool isInCandidate(char* temp);
 	
 
 	bool setName(char* temp);
@@ -47,4 +45,3 @@ private:
 
 
 #endif // !_PARTY_H
-
