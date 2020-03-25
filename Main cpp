@@ -5,12 +5,22 @@ using namespace std;
 
 const int Size = 20;
 
+void cleanbuffer()
+{
+	int c;
+	do
+	{
+		c = getchar();
+	} while (c != EOF && c != '\n');
+}
+
+
 int main()
 {
 	int month = 1;
 	int year = 2001;
 	ElectionRound round;
-	if (!round.openElctionround(month, year));
+	if (!round.openElctionround(month, year))
 	{
 
 	}
@@ -44,13 +54,13 @@ int main()
 	}
 
 	int BallotID = 120;
-	Address address;
+	Address addresss;
 	char city[Size] = "Tel Aviv";
 	char street[Size] = "Dizingof";
-	address.setCity(city);
-	address.setHouse_Number(2);
-	address.setStreet(street);
-	if (!round.addBallot(BallotID, address))
+	addresss.setCity(city);
+	addresss.setHouse_Number(2);
+	addresss.setStreet(street);
+	if (!round.addBallot(BallotID, addresss))
 	{
 
 	}
@@ -58,10 +68,10 @@ int main()
 	BallotID = 250;
 	char city2[Size] = "Hifa";
 	char street2[Size] = "Hertzel";
-	address.setCity(city2);
-	address.setHouse_Number(72);
-	address.setStreet(street2);
-	if (!round.addBallot(BallotID, address))
+	addresss.setCity(city2);
+	addresss.setHouse_Number(72);
+	addresss.setStreet(street2);
+	if (!round.addBallot(BallotID, addresss))
 	{
 
 	}
@@ -132,7 +142,153 @@ int main()
 
 	}
 
-	round.startElection();
-	round.showResults();
+	
+	int choice;
+	int ballotID;
+	int ballotNumberHouse;
+	char ballotCity[Size];
+	char ballotStreet[Size];
 
+	int partyIndex;
+	char manName[Size];
+	char manID[Size];
+	int manYear;
+	Ballot *manBallot;
+	int ballotIndex;
+
+	Address address;
+
+	char partyName[Size];
+	Establishment_Date partyDate;
+	int partyYear, partyMonth, partyDay;
+	int spectrum;
+
+	bool Cuntinue = true;
+
+
+	while (Cuntinue)
+	{
+		round.menu();
+		cin >> choice;
+		switch (choice) {
+		case 1:
+		{
+			cout << "Enter ballot Id: ";
+			cin >> ballotID;
+			cout << endl << "Enter ballot city name: ";
+			cleanbuffer();
+			cin.getline( ballotCity,Size);
+			cout << endl << "Enter ballot street name: ";
+			cin.getline( ballotStreet,Size);
+			cout << endl << "Enter ballot house number: ";
+			cin >>ballotNumberHouse;
+			cout << endl;
+			address.setCity(ballotCity);
+			address.setStreet(ballotStreet);
+			address.setHouse_Number(ballotNumberHouse);
+			round.addBallot(ballotID, address);
+		}
+		break;
+		case 2:
+		{
+			cout << "Enter name : ";
+			cleanbuffer();
+			cin.getline(manName, Size);
+			cout << endl << "Enter 9 digits ID number: ";
+			cin >>manID;
+			cout << endl << "Enter year of birth: ";
+			cin >> manYear;
+			cout << endl << "Choose ballot ID: " << endl;
+
+			for (int j = 0; j < round.getlogBallots(); j++)
+			{
+				cout << (j + 1) << ". " << round.getballots()[j]->getID() << endl;
+			}
+			cin >> ballotIndex;
+			cout << endl;
+
+			manBallot = round.getballots()[ballotIndex-1];
+
+			man.setName(manName);
+			man.setBirthday(manYear);
+			man.setBallot(manBallot);
+			man.setID(manID);
+			man.setCandidate(false);
+			round.addVoter(man, -1);
+		}
+		break;
+		case 3:
+		{
+			cout << "Enter party name" << endl;
+			cleanbuffer();
+			cin.getline(partyName, Size);
+			cout << "Enter party establishment day of the month" << endl;
+			cin >> partyDay;
+			cout << "Enter party establishment month" << endl;
+			cin >> partyMonth;
+			cout << "Enter party establishment year" << endl;
+			cin >> partyYear;
+			cout << "Choose party spectrum: " << endl <<
+				"1. Left" << endl << "2. Right" << endl << "3. Center" << endl;
+			cin >> spectrum;
+			partyDate.setDay(partyDay);
+			partyDate.setMonth(partyMonth);
+			partyDate.setYear(partyYear);
+
+			round.addParty(partyName, partyDate, (spectrum - 1));//check if we need -1
+		}
+			break;
+		case 4:
+		{
+			cout << "Enter name : ";
+			cleanbuffer();
+			cin.getline(manName, Size);
+			cout << endl << "Enter 9 digits ID number : ";
+			cin >> manID;
+			cout << endl << "Enter year of birth: ";
+			cin >> manYear;
+			cout << endl << "Choose ballot ID: " << endl;
+
+			for (int j = 0; j < round.getlogBallots(); j++)
+			{
+				cout << (j + 1) << ". " << round.getballots()[j]->getID() << endl;
+			}
+			cin >> ballotIndex;
+			cout << endl << "Choose party: " << endl;
+			for (int j = 0; j < round.getlogParties(); j++)
+			{
+				cout << (j + 1) << ". " << round.getparties()[j]->getName() << endl;
+			}
+			cin >> partyIndex;
+
+			manBallot = round.getballots()[ballotIndex - 1];
+
+			man.setName(manName);
+			man.setBirthday(manYear);
+			man.setBallot(manBallot);
+			man.setID(manID);
+			man.setCandidate(true);
+			round.addVoter(man, partyIndex);
+		}
+		break;
+		case 5:
+			round.showAllBallots();
+			break;
+		case 6:
+			round.showAllCivilans();
+			break;
+		case 7:
+			round.showAllParties();
+			break;
+		case 8:
+			round.startElection();
+			break;
+		case 9:
+			round.showResults();
+			break;
+		case 10:
+			Cuntinue = false;
+			break;
+		}
+	}
 }
