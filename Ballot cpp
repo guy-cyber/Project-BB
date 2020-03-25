@@ -36,7 +36,9 @@ bool Ballot::setAddress(Address& temp)
 {
 	if ((strlen(temp.getCity()) > 1) && (temp.getHouse_Number() > 0) &&
 		(strlen(temp.getStreet()) > 0)) {
-		address = temp;
+		address.setCity(temp.getCity());
+		address.setStreet(temp.getStreet());
+		address.setHouse_Number(temp.getHouse_Number());
 		return true;
 	}
 	else return false;
