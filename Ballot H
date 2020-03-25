@@ -26,19 +26,19 @@ public: int getID();
 		Voter** getVoters();
 		Voter getVoter(const int& i);
 		float getVoters_percent();
-		int getSumVotes(const int& i);
+		int* getSumVotes();
 		int getLogVoters();
 		
 
 		bool setPhySumVoters(const int& size);
 		bool setID(const int & temp);
-		bool setAddress(const Address& temp);
+		bool setAddress(Address& temp);
 		bool increaseList(Voter** temp);
-		bool addVoter(const Citizen& temp);
+		bool addVoter(Citizen& temp);
 		bool openVotersListList();
-		bool isInVoters(const Citizen& temp);
+		bool isInVoters(Citizen& temp);
 		float calculateVoterPercent();
-		bool openSumVotes();
+		bool openSumVotes(int i);
 		bool addVote(const int& i);
 
 		void showBallot();
