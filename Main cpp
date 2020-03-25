@@ -1,0 +1,138 @@
+#include <iostream>
+using namespace std;
+
+#include "ElectionRoundh.h"
+
+const int Size = 20;
+
+int main()
+{
+	int month = 1;
+	int year = 2001;
+	ElectionRound round;
+	if (!round.openElctionround(month, year));
+	{
+
+	}
+	char party1name[Size] = "Likud";
+	int party1spectrum = 1;
+	Establishment_Date Edate;
+	Edate.setDay(17);
+	Edate.setMonth(10);
+	Edate.setYear(1973);
+	if (!round.addParty(party1name, Edate, party1spectrum))
+	{
+
+	}
+	char party3name[Size] = "Avoda";
+	party1spectrum = 0;
+	Edate.setDay(16);
+	Edate.setMonth(2);
+	Edate.setYear(1954);
+	if (!round.addParty(party3name, Edate, party1spectrum))
+	{
+
+	}
+	char party2name[Size] = "Kahol Lavan";
+	party1spectrum = 2;
+	Edate.setDay(3);
+	Edate.setMonth(1);
+	Edate.setYear(2019);
+	if (!round.addParty(party2name, Edate, party1spectrum))
+	{
+
+	}
+
+	int BallotID = 120;
+	Address address;
+	char city[Size] = "Tel Aviv";
+	char street[Size] = "Dizingof";
+	address.setCity(city);
+	address.setHouse_Number(2);
+	address.setStreet(street);
+	if (!round.addBallot(BallotID, address))
+	{
+
+	}
+
+	BallotID = 250;
+	char city2[Size] = "Hifa";
+	char street2[Size] = "Hertzel";
+	address.setCity(city2);
+	address.setHouse_Number(72);
+	address.setStreet(street2);
+	if (!round.addBallot(BallotID, address))
+	{
+
+	}
+
+	int partynumber = 0;
+	char Name[Size] = "Moshe Hagibor";
+	char manId[Size] = "456111231";
+	Citizen man;
+	man.setName(Name);
+	man.setBirthday(1991);
+	man.setBallot(round.getballots()[0]);
+	man.setID(manId);
+	man.setCandidate(true);
+	if (!round.addVoter(man, partynumber))
+	{
+
+	}
+
+	partynumber = 1;
+	char Name2[Size] = "David Rosh Gadol";
+	char manId2[Size] = "456187461";
+	man.setName(Name2);
+	man.setBirthday(1984);
+	man.setBallot(round.getballots()[1]);
+	man.setID(manId2);
+	man.setCandidate(true);
+	if (!round.addVoter(man, partynumber))
+	{
+
+	}
+
+	partynumber = 2;
+	char Name3[Size] = "Michael Oznei Pil";
+	char manId3[Size] = "789487461";
+	man.setName(Name3);
+	man.setBirthday(1987);
+	man.setBallot(round.getballots()[0]);
+	man.setID(manId3);
+	man.setCandidate(true);
+	if (!round.addVoter(man, partynumber))
+	{
+
+	}
+	
+	partynumber = -1;
+	char Name4[Size] = "Liran Hulcha Afora";
+	char manId4[Size] = "789412341";
+	man.setName(Name4);
+	man.setBirthday(1957);
+	man.setBallot(round.getballots()[1]);
+	man.setID(manId4);
+	man.setCandidate(false);
+	if (!round.addVoter(man, partynumber))
+	{
+
+	}
+
+	partynumber = -1;
+	char Name5[Size] = "Ruven Hamalah";
+	char manId5[Size] = "784412341";
+	man.setName(Name5);
+	man.setBirthday(1957);
+	man.setBallot(round.getballots()[1]);
+	man.setID(manId5);
+	man.setCandidate(false);
+	if (!round.addVoter(man, partynumber))
+	{
+
+	}
+
+	round.startElection();
+	round.showResults();
+
+}
