@@ -68,6 +68,7 @@ public:
 	void showResults();
 
 	void startElection();
+	void menu();
 
 };
 
