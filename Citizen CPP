@@ -27,7 +27,7 @@ bool  Citizen::setName(char* temp)
 	int size = (strlen(temp) + 1);
 	if (size >= 2) {
 		Name = new char[size];
-		strcpy(Name, temp);
+		strcpy_s(Name,size, temp);
 		return true;
 	}
 	else return false;
@@ -37,7 +37,7 @@ bool Citizen::setID(char* temp)
 	int size = (strlen(temp) + 1);
 	if (size == 10)
 	{
-		strcpy(Name, temp);
+		strcpy_s(id, size, temp);
 		return true;
 	}
 	else return false;
@@ -53,12 +53,10 @@ bool Citizen::setBirthday(const int& temp)
 }
 bool Citizen::setBallot(Ballot* temp)
 {
-	if (temp->getID() > 0) 
-	{
-		ballot = temp;
-		return true;
-	}
-	else return false;
+	
+	ballot = temp;
+	return true;
+	
 }
 void Citizen::setCandidate(const bool& temp)
 {
@@ -68,5 +66,5 @@ void Citizen::setCandidate(const bool& temp)
 void Citizen::ShowCivilian()
 {
 	cout << "Name: " << getName() << endl << " ID Number: " << getID() << endl
-		<< " Birth Year: " << getBirthYear() << endl << "Ballot ID: " << getBallot()->getID() << endl;
+		<< " Birth Year: " << getBirthYear() << endl;
 }
