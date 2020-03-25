@@ -32,10 +32,10 @@ bool Ballot::setID(const int& temp)
 	}
 	else return false;
 }
-bool Ballot::setAddress(const Address& temp)
+bool Ballot::setAddress(Address& temp)
 {
-	if ((strlen(temp.getCity) > 1) && (temp.getHouse_Number > 0) &&
-		(strlen(temp.getStreet) > 0)) {
+	if ((strlen(temp.getCity()) > 1) && (temp.getHouse_Number() > 0) &&
+		(strlen(temp.getStreet()) > 0)) {
 		address = temp;
 		return true;
 	}
@@ -44,24 +44,24 @@ bool Ballot::setAddress(const Address& temp)
 bool Ballot::increaseList(Voter** temp)
 {
 	phyVoters *= 2;
-	voters = new Voter *[phyVoters];
+	voters = new Voter* [phyVoters];
 	voters = temp;
 	if (!voters)
 		return false;
 	return true;
 }
 //check if the citizen is already inside the voters array
-bool Ballot::isInVoters(const Citizen& temp)
+bool Ballot::isInVoters(Citizen& temp)
 {
 	for (int i = 0; i < logVoters; i++)
 	{
-		if (strcmp(voters[i]->getCivilian().getID(),temp.getID) == 0)
+		if (strcmp(voters[i]->getCivilian().getID(),temp.getID()) == 0)
 			return true;
 		else return false;
 	}
 }
 
-bool Ballot::addVoter(const Citizen& temp)
+bool Ballot::addVoter(Citizen& temp)
 {
 	if (logVoters >= phyVoters)
 	{
@@ -71,8 +71,8 @@ bool Ballot::addVoter(const Citizen& temp)
 	if (!isInVoters(temp))
 	{
 		voters[logVoters] = new Voter;
-		*(voters[logVoters])->setCivilian = temp;
-		*(voters[logVoters])->setVoted = false;
+		(voters[logVoters])->setCivilian(temp);
+		(voters[logVoters])->setVoted(false);
 		logVoters++;
 		return true;
 	}
@@ -98,27 +98,28 @@ float Ballot::calculateVoterPercent()
 		if (getVoter(i).getVoted())
 			sum++;
 	}
-	voters_precent = sum / logVoters;
+	voters_precent = (float)(sum / logVoters);
 	return voters_precent;
 }
 
-int Ballot::getSumVotes(const int& i)
+int* Ballot::getSumVotes()
 {
-	return sumVotes[i];
+	return sumVotes;
 }
 
 bool Ballot::addVote(const int& i)
 {
-	if (i < phyVoters)
+	if (i < phySumVoters)
 	{
-		sumVotes[i]++;
+		(sumVotes[i])++;
 		return true;
 	}
 	return false;
 }
 
-bool Ballot::openSumVotes()
+bool Ballot::openSumVotes(int temp)
 {
+	phySumVoters = temp;
 	sumVotes = new int[phySumVoters];
 	int i;
 	if (!sumVotes)
