@@ -16,10 +16,11 @@ int Address::getHouse_Number()
 
 bool Address::setCity(char* temp)
 {
-	int size = (strlen(temp) + 1);
+	int size = strlen(temp);
+	size++;
 	if (size >= 2) {
 		City = new char[size];
-		strcpy(City, temp);
+		strcpy_s(City,size, temp);
 		return true;
 	}
 	else return false;
@@ -29,7 +30,7 @@ bool Address::setStreet(char* temp)
 	int size = (strlen(temp) + 1);
 	if (size >= 2) {
 		Street = new char[size];
-		strcpy(Street, temp);
+		strcpy_s(Street,size, temp);
 		return true;
 	}
 	else return false;
