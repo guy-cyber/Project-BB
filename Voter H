@@ -10,7 +10,7 @@ private:
 	Citizen civilian;
 	bool voted;
 public:
-	Citizen getCivilian();
+	Citizen& getCivilian();
 	bool getVoted();
 
 	bool setCivilian(Citizen& temp);
