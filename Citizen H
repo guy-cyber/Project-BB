@@ -1,11 +1,9 @@
-#pragma once
-
 #ifndef _CITIZEN_H
 #define _CITIZEN_H
 
 
 #include <iostream>
-#include "Ballot.h"
+
 
 class Ballot;
 
@@ -37,7 +35,6 @@ public:
 
 
 #endif // !_CITIZEN_H
-
 
 
 
