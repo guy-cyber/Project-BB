@@ -29,8 +29,18 @@ private:
 public:
 	int getyear();
 	int getmonth();
+	int getlogVoters();
+	int getphyVoters();
+	int getlogParties();
+	int getphyParties();
+	int getlogBallots();
+	int getphyBallots();
 
+	Voter** getvoters();
+	Party** getparties();
+	Ballot** getballots();
 	
+
 
 
 	bool openElctionround(const int& month,const int& year);
@@ -43,7 +53,7 @@ public:
 	bool openBallotList();
 	bool isInBallots(const int& temp);
 	bool increaseBallotsList(Ballot** temp);
-	bool addBallot(const int& TempID,const Address& TempAddres);
+	bool addBallot(const int& TempID,Address& TempAddres);
 
 	bool openVotersList();
 	bool isInVoters(char* temp);
@@ -55,11 +65,13 @@ public:
 	void showAllCivilans();
 	void showAllParties();
 	void showAllBallots();
+	void showResults();
 
 	void startElection();
+
 };
 
 
 
 
-#endif _ELEC
+#endif _ELECTIONROUND_H
