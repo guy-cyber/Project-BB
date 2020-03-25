@@ -44,7 +44,9 @@ bool Party::setDate(Establishment_Date& temp)
 	if (((temp.getYear() >= 1 && temp.getYear() <= 2020)) && (temp.getMonth() >= 1 && temp.getMonth() <= 12)
 		&& (temp.getday() >= 1 && temp.getday() <= 31))
 	{
-		Date = temp;
+		Date.setDay(temp.getday());
+		Date.setMonth(temp.getMonth());
+		Date.setYear(temp.getYear());
 		return true;
 	}
 	else return false;
