@@ -1,23 +1,23 @@
 #include "citizen.h"
 
-char* Citizen::getName()
+char* Citizen::getName() const
 {
 	return Name;
 }
 
-char* Citizen::getID() 
+char* Citizen::getID()
 {
 	return id;
 }
-int  Citizen::getBirthYear()
+int  Citizen::getBirthYear() const
 {
 	return BirthYear;
 }
-Ballot*  Citizen::getBallot()
+Ballot*  Citizen::getBallot() const
 {
 	return ballot;
 }
-bool  Citizen:: getCandidate()
+bool  Citizen:: getCandidate() const
 {
 	return candidate;
 }
@@ -35,7 +35,7 @@ bool  Citizen::setName(char* temp)
 bool Citizen::setID(char* temp)
 {
 	int size = (strlen(temp) + 1);
-	if (size == 10)
+	if (size <= 10)
 	{
 		strcpy_s(id, size, temp);
 		return true;
@@ -63,8 +63,13 @@ void Citizen::setCandidate(const bool& temp)
 	candidate = temp;
 }
 
-void Citizen::ShowCivilian()
+void Citizen::ShowCivilian() 
 {
-	cout << "Name: " << getName() << endl << " ID Number: " << getID() << endl
-		<< " Birth Year: " << getBirthYear() << endl;
+	cout << "Name: " << getName() << endl << "ID Number: " << getID() << endl
+		<< "Birth Year: " << getBirthYear() << endl<<endl;
+}
+
+void Citizen::freeCitizen()
+{
+	delete []Name;
 }
