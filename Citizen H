@@ -17,11 +17,11 @@ private:
 	Ballot* ballot;
 	bool candidate;
 public:
-	char* getName();
+	char* getName()						const;
 	char* getID();
-	int getBirthYear();
-	Ballot* getBallot();
-	bool getCandidate();
+	int getBirthYear()					const;
+	Ballot* getBallot()					const;
+	bool getCandidate()					const;
 
 	bool setName(char* temp);
 	bool setID(char* temp);
@@ -30,6 +30,7 @@ public:
 	void setCandidate(const bool& temp);
 
 	void ShowCivilian();
+	void freeCitizen();
 };
 
 
