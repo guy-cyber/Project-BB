@@ -1,23 +1,23 @@
 #include "ballot.h"
 
-int Ballot::getID()
+int Ballot::getID() const
 {
 	return id;
 }
-Address Ballot::getAddress()
+Address Ballot::getAddress() const
 {
 	return address;
 }
-Voter** Ballot::getVoters()
+Voter** Ballot::getVoters() const
 {
 	return voters;
 }
 
-Voter Ballot::getVoter(const int& i)
+Voter Ballot::getVoter(const int& i) const
 {
 	return *(voters[i]);
 }
-float Ballot::getVoters_percent()
+float Ballot::getVoters_percent() const
 {
 	return voters_precent;
 }
@@ -47,13 +47,15 @@ bool Ballot::increaseList(Voter** temp)
 {
 	phyVoters *= 2;
 	voters = new Voter* [phyVoters];
-	voters = temp;
+	for (int i = 0; i < logVoters; i++)
+		voters[i] = temp[i];
+	delete[]temp;
 	if (!voters)
 		return false;
 	return true;
 }
 //check if the citizen is already inside the voters array
-bool Ballot::isInVoters(Citizen& temp)
+bool Ballot::isInVoters(Citizen& temp) const
 {
 	for (int i = 0; i < logVoters; i++)
 	{
@@ -91,7 +93,7 @@ bool Ballot::openVotersListList()
 }
 
 
-float Ballot::calculateVoterPercent()
+float Ballot::calculateVoterPercent() 
 {
 	int sum = 0;
 	int i;
@@ -104,7 +106,7 @@ float Ballot::calculateVoterPercent()
 	return voters_precent;
 }
 
-int* Ballot::getSumVotes()
+int* Ballot::getSumVotes()  const
 {
 	return sumVotes;
 }
@@ -141,20 +143,27 @@ bool Ballot::setPhySumVoters(const int& size)
 	else return false;
 }
 
-int Ballot::getLogVoters()
+int Ballot::getLogVoters() const
 {
 	return logVoters;
 }
 
-void Ballot::showBallot()
+void Ballot::showBallot() const
 {
-	cout << "ID number: " << getID() << endl << "Addrees:" << endl;
+	cout <<endl<< "Ballots number: " << getID() << endl << "Addrees:" << endl;
 	getAddress().showAddress();
-	cout << "Number of voters: " << getLogVoters() << endl;
-	cout << "Voters data:" << endl;
+	cout << "Number of voters: " << getLogVoters() << endl<<endl;
+	cout << "Voters data:" << endl<<endl;
 	for (int i = 0; i < logVoters ; i++)
 	{
-		cout << i + 1 << ":" << endl;
+	
 		getVoter(i).getCivilian().ShowCivilian();
 	}
+}
+
+void Ballot::freeBallot()
+{
+	delete []getVoters();
+	delete []sumVotes;
+	address.freeAddress();
 }
