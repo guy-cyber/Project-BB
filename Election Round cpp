@@ -1,48 +1,48 @@
 #include "ElectionRoundh.h"
 
-int ElectionRound::getyear()
+int ElectionRound::getyear() const
 {
 	return year;
 }
-int ElectionRound::getmonth()
+int ElectionRound::getmonth() const
 {
 	return month;
 }
 
-int ElectionRound::getlogVoters()
+int ElectionRound::getlogVoters() const
 {
 	return logVoters;
 }
-int ElectionRound::getphyVoters()
+int ElectionRound::getphyVoters() const
 {
 	return phyVoters;
 }
-int ElectionRound::getlogParties()
+int ElectionRound::getlogParties() const
 {
 	return logParties;
 }
-int ElectionRound::getphyParties()
+int ElectionRound::getphyParties() const
 {
 	return phyParties;
 }
-int ElectionRound::getlogBallots()
+int ElectionRound::getlogBallots() const
 {
 	return logBallots;
 }
-int ElectionRound::getphyBallots()
+int ElectionRound::getphyBallots() const
 {
 	return phyBallots;
 }
 
-Voter** ElectionRound::getvoters()
+Voter** ElectionRound::getvoters() const
 {
 	return voters;
 }
-Party** ElectionRound::getparties()
+Party** ElectionRound::getparties() const
 {
 	return parties;
 }
-Ballot** ElectionRound::getballots()
+Ballot** ElectionRound::getballots() const
 {
 	return ballots;
 }
@@ -66,7 +66,7 @@ bool ElectionRound::openElctionround(const int& tempMonth,const int& tempYear) {
 }
 
 
-bool ElectionRound::isInVoters(char* temp)
+bool ElectionRound::isInVoters(char* temp) const
 {
 	for (int i = 0; i < logVoters; i++)
 	{
@@ -79,7 +79,9 @@ bool ElectionRound::increaseVoterList(Voter** temp)
 {
 	phyVoters *= 2;
 	voters = new Voter *[phyVoters];
-	voters = temp;
+	for (int i = 0; i < logVoters; i++)
+		voters[i] = temp[i];
+	delete []temp;
 	if (!voters)
 		return false;
 	return true;
@@ -121,7 +123,7 @@ bool ElectionRound::openVotersList()
 
 
 
-bool ElectionRound::isInBallots(const int& temp)
+bool ElectionRound::isInBallots(const int& temp) const
 {
 	for (int i = 0; i < logBallots; i++)
 	{
@@ -134,7 +136,9 @@ bool ElectionRound::increaseBallotsList(Ballot** temp)
 {
 	phyBallots *= 2;
 	ballots = new Ballot *[phyBallots];
-	ballots = temp;
+	for (int i = 0; i < logBallots; i++)
+		ballots[i] = temp[i];
+	delete []temp;
 	if (!ballots)
 		return false;
 	return true;
@@ -172,7 +176,7 @@ bool ElectionRound::openBallotList()
 	return true;
 }
 
-bool ElectionRound::isInParties(char* temp)
+bool ElectionRound::isInParties(char* temp) const
 {
 	for (int i = 0; i < logParties; i++)
 	{
@@ -186,7 +190,9 @@ bool ElectionRound::increasePartiesList(Party** temp)
 {
 	phyParties *= 2;
 	parties = new Party *[phyParties];
-	parties = temp;
+	for (int i = 0; i < logParties; i++)
+		parties[i] = temp[i];
+	delete []temp;
 	if (!parties)
 		return false;
 	return true;
@@ -241,9 +247,9 @@ Citizen ElectionRound::creatCitizen(char* tempName, char* tempID,const int& temp
 
 
 
-void ElectionRound::showAllCivilans()
+void ElectionRound::showAllCivilans() const
 {
-	cout << "All the registerd citizens: " << endl;
+	cout <<endl<< "All the registerd citizens: " << endl<<endl;
 	for (int i = 0; i < logVoters; i++)
 	{
 		cout << i + 1 << ": " << endl;
@@ -251,9 +257,9 @@ void ElectionRound::showAllCivilans()
 	}
 }
 
-void ElectionRound::showAllParties()
+void ElectionRound::showAllParties() const
 {
-	cout << "All the parties data: " << endl;
+	cout << endl << "All the parties data: " << endl<<endl;
 	for (int i = 0; i < logParties; i++)
 	{
 		cout << i + 1 << ": " << endl;
@@ -261,12 +267,11 @@ void ElectionRound::showAllParties()
 	}
 }
 
-void ElectionRound::showAllBallots()
+void ElectionRound::showAllBallots() const
 {
-	cout << "All the ballots data: " << endl;
+	cout <<endl<< "All the ballots data: " << endl;
 	for (int i = 0; i < logBallots; i++)
 	{
-		cout << (i + 1) << ": " << endl;
 		ballots[i]->showBallot();
 	}
 }
@@ -306,7 +311,7 @@ void ElectionRound::startElection()
 	}
 }
 
-void ElectionRound::showResults()
+void ElectionRound::showResults() const
 {
 	for (int i = 0; i < logBallots; i++)
 	{
@@ -327,11 +332,36 @@ void ElectionRound::showResults()
 
 }
 
-void ElectionRound::menu()
+void ElectionRound::menu() const
 {
-	cout << "Hello, choose one of the following options: " << endl;
 	cout << "1. Add ballot" << endl << "2. Add Citizen " << endl << "3. Add Party" << endl
 		<< "4. Add candidate" << endl << "5. Show all ballots" << endl << "6. Show all citzens"
 		<< endl << "7. Show all parties" << endl << "8. Make an election round" <<
 		endl << "9. Show the result of the elections" << endl << "10. Exit" << endl;
+}
+
+void ElectionRound::freeAll()
+{
+	for (int i = 0; i < logBallots; i++)
+	{
+		ballots[i]->freeBallot();
+		delete ballots[i];
+	}
+
+	delete []ballots;
+	
+
+	for (int i = 0; i < logParties; i++)
+	{
+		parties[i]->freeParty();
+		delete parties[i];
+	}
+	delete []parties;
+
+	for (int i = 0; i < logVoters; i++)
+	{
+		voters[i]->getCivilian().freeCitizen();
+		delete voters[i];
+	}
+	delete[]voters;
 }
