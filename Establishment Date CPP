@@ -1,14 +1,14 @@
 #include "establishment_date.h"
 
-int Establishment_Date::getYear()
+int Establishment_Date::getYear() const
 {
 	return year;
 }
-int Establishment_Date::getMonth()
+int Establishment_Date::getMonth() const
 {
 	return month;
 }
-int Establishment_Date::getday()
+int Establishment_Date::getday() const
 {
 	return day;
 }
@@ -41,7 +41,7 @@ bool Establishment_Date::setDay(const int& temp)
 	else return false;
 }
 
-void Establishment_Date::showEstablismentDate()
+void Establishment_Date::showEstablismentDate() const
 {
 	cout << getday() << "." << getMonth() << "." << getYear() <<
 		endl;
