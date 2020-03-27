@@ -4,12 +4,12 @@
 
 
 
-Citizen& Voter::getCivilian()
+Citizen& Voter::getCivilian()	
 {
 	return civilian;
 }
 
-bool Voter::getVoted()
+bool Voter::getVoted()	const
 {
 	return voted;
 }
