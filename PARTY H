@@ -13,24 +13,25 @@ public:
 	enum Spectrum { LEFT, RIGHT, CENTER };
 	const char* spectrumDirrect[3] = { "Left","Right","Center" };
 
-	char* getName();
-	Party::Spectrum getPolitical_spectrum();
-	Establishment_Date getDate();
-	Citizen* getCitizen(const int& num);
-	Citizen** getCandidateList();
-	int getSumVoted();
+	char* getName()							const;
+	Party::Spectrum getPolitical_spectrum()	const;
+	Establishment_Date getDate()			const;
+	Citizen* getCitizen(const int& num)		const;
+	Citizen** getCandidateList()			const;
+	int getSumVoted()						const;
 	
 
 	bool setName(char* temp);
 	bool setPolitical_spectrum(const Spectrum& temp);
 	bool setDate(Establishment_Date& temp);
-	bool isInCandidate(char* temp);
+	bool isInCandidate(char* temp)			const;
 	bool increaseList(Citizen** temp);
 	bool addCandidate(Citizen& temp);
 	bool openCandidateList();
 	void addVote();
 
-	void showParty();
+	void showParty()						const;
+	void freeParty();
 	
 private:
 	char* Name;
@@ -45,5 +46,4 @@ private:
 
 
 #endif // !_PARTY_H
-
 
