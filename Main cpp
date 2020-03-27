@@ -115,7 +115,7 @@ int main()
 	{
 
 	}
-	
+
 	partynumber = -1;
 	char Name4[Size] = "Liran Hulcha Afora";
 	char manId4[Size] = "789412341";
@@ -165,7 +165,7 @@ int main()
 
 	bool Cuntinue = true;
 
-
+	cout << "Hello, choose one of the following options: " << endl;
 	while (Cuntinue)
 	{
 		round.menu();
@@ -173,7 +173,7 @@ int main()
 		switch (choice) {
 		case 1:
 		{
-			cout << "Enter ballot Id: ";
+			cout << endl << "Enter ballot Id: ";
 			cin >> ballotID;
 			cout << endl << "Enter ballot city name: ";
 			cleanbuffer();
@@ -191,7 +191,7 @@ int main()
 		break;
 		case 2:
 		{
-			cout << "Enter name : ";
+			cout << endl << "Enter name : ";
 			cleanbuffer();
 			cin.getline(manName, Size);
 			cout << endl << "Enter 9 digits ID number: ";
@@ -205,7 +205,7 @@ int main()
 				cout << (j + 1) << ". " << round.getballots()[j]->getID() << endl;
 			}
 			cin >> ballotIndex;
-			cout << endl;
+			cout << endl << endl;
 
 			manBallot = round.getballots()[ballotIndex-1];
 
@@ -219,18 +219,19 @@ int main()
 		break;
 		case 3:
 		{
-			cout << "Enter party name" << endl;
+			cout <<endl<< "Enter party name: ";
 			cleanbuffer();
 			cin.getline(partyName, Size);
-			cout << "Enter party establishment day of the month" << endl;
+			cout << endl << "Enter party establishment day of the month: ";
 			cin >> partyDay;
-			cout << "Enter party establishment month" << endl;
+			cout <<endl<< "Enter party establishment month: " ;
 			cin >> partyMonth;
-			cout << "Enter party establishment year" << endl;
+			cout << endl << "Enter party establishment year: " ;
 			cin >> partyYear;
-			cout << "Choose party spectrum: " << endl <<
+			cout << endl << "Choose party spectrum: " << endl <<
 				"1. Left" << endl << "2. Right" << endl << "3. Center" << endl;
 			cin >> spectrum;
+			cout << endl;
 			partyDate.setDay(partyDay);
 			partyDate.setMonth(partyMonth);
 			partyDate.setYear(partyYear);
@@ -240,7 +241,7 @@ int main()
 			break;
 		case 4:
 		{
-			cout << "Enter name : ";
+			cout << endl << "Enter name : ";
 			cleanbuffer();
 			cin.getline(manName, Size);
 			cout << endl << "Enter 9 digits ID number : ";
@@ -260,6 +261,7 @@ int main()
 				cout << (j + 1) << ". " << round.getparties()[j]->getName() << endl;
 			}
 			cin >> partyIndex;
+			cout << endl;
 
 			manBallot = round.getballots()[ballotIndex - 1];
 
@@ -268,7 +270,7 @@ int main()
 			man.setBallot(manBallot);
 			man.setID(manID);
 			man.setCandidate(true);
-			round.addVoter(man, partyIndex);
+			round.addVoter(man, partyIndex-1);
 		}
 		break;
 		case 5:
@@ -286,9 +288,10 @@ int main()
 		case 9:
 			round.showResults();
 			break;
-		case 10:
+		case 10: {
 			Cuntinue = false;
-			break;
+			round.freeAll();
+		}break;
 		}
 	}
 }
