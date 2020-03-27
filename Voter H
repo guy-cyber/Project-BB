@@ -11,7 +11,7 @@ private:
 	bool voted;
 public:
 	Citizen& getCivilian();
-	bool getVoted();
+	bool getVoted()			const;
 
 	bool setCivilian(Citizen& temp);
 	bool setVoted(const bool& temp);
