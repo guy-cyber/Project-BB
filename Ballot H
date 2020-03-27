@@ -21,13 +21,13 @@ private:
 	int phyVoters;
 	int phySumVoters;
 	//results//
-public: int getID();
-		Address getAddress();
-		Voter** getVoters();
-		Voter getVoter(const int& i);
-		float getVoters_percent();
-		int* getSumVotes();
-		int getLogVoters();
+public: int getID()                   const;
+		Address getAddress()          const;
+		Voter** getVoters()           const;
+		Voter getVoter(const int& i)  const;
+		float getVoters_percent()     const;
+		int* getSumVotes()            const;
+		int getLogVoters()            const;
 		
 
 		bool setPhySumVoters(const int& size);
@@ -36,12 +36,13 @@ public: int getID();
 		bool increaseList(Voter** temp);
 		bool addVoter(Citizen& temp);
 		bool openVotersListList();
-		bool isInVoters(Citizen& temp);
+		bool isInVoters(Citizen& temp) const;
 		float calculateVoterPercent();
 		bool openSumVotes(int i);
 		bool addVote(const int& i);
 
-		void showBallot();
+		void showBallot()              const;
+		void freeBallot();
 };
 
 
