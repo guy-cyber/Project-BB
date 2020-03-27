@@ -12,15 +12,15 @@ private:
 	int day;
 
 public:
-	int getYear();
-	int getMonth();
-	int getday();
+	int getYear()	const;
+	int getMonth()	const;
+	int getday()	const;
 
 	bool setYear(const int& temp);
 	bool setMonth(const int& temp);
 	bool setDay(const int& temp);
 
-	void showEstablismentDate();
+	void showEstablismentDate()	const;
 
 };
 
