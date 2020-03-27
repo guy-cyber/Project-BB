@@ -27,18 +27,18 @@ private:
 	Ballot** ballots;
 
 public:
-	int getyear();
-	int getmonth();
-	int getlogVoters();
-	int getphyVoters();
-	int getlogParties();
-	int getphyParties();
-	int getlogBallots();
-	int getphyBallots();
+	int getyear()			const;
+	int getmonth()			const;
+	int getlogVoters()		const;
+	int getphyVoters()		const;
+	int getlogParties()		const;
+	int getphyParties()		const;
+	int getlogBallots()		const;
+	int getphyBallots()		const;
 
-	Voter** getvoters();
-	Party** getparties();
-	Ballot** getballots();
+	Voter** getvoters()		const;
+	Party** getparties()	const;
+	Ballot** getballots()	const;
 	
 
 
@@ -46,30 +46,30 @@ public:
 	bool openElctionround(const int& month,const int& year);
 
 	bool openPartiesList();
-	bool isInParties(char* temp);
+	bool isInParties(char* temp)	const;
 	bool increasePartiesList(Party** temp);
 	bool addParty(char* TempName,Establishment_Date& tempDate,const int& tempSpectrum);
 
 	bool openBallotList();
-	bool isInBallots(const int& temp);
+	bool isInBallots(const int& temp)	const;
 	bool increaseBallotsList(Ballot** temp);
 	bool addBallot(const int& TempID,Address& TempAddres);
 
 	bool openVotersList();
-	bool isInVoters(char* temp);
+	bool isInVoters(char* temp)	const;
 	bool increaseVoterList(Voter** temp);
 	bool addVoter(Citizen& temp,const int& partyIndex);
 
 	Citizen creatCitizen(char* tempName, char* tempID,const int& tempYear,Ballot* tempBallote,const bool& tempCandidate);
 
-	void showAllCivilans();
-	void showAllParties();
-	void showAllBallots();
-	void showResults();
+	void showAllCivilans()	const;
+	void showAllParties()	const;
+	void showAllBallots()	const;
+	void showResults()		const;
 
 	void startElection();
-	void menu();
-
+	void menu()				const;
+	void freeAll();
 };
 
 
