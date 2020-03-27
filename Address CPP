@@ -1,15 +1,15 @@
 #include "address.h"
 
 
-char* Address::getCity() 
+char* Address::getCity() const
 {
 	return City;
 }
-char* Address::getStreet()
+char* Address::getStreet() const
 {
 	return Street;
 }
-int Address::getHouse_Number()
+int Address::getHouse_Number() const
 {
 	return House_Number;
 }
@@ -45,10 +45,16 @@ bool Address::setHouse_Number(const int& temp)
 	else return false;
 }
 
-void Address::showAddress()
+void Address::showAddress() const
 {
 	cout << "City: " << getCity() << endl <<
 		"Street: " << getStreet() << "  " << getHouse_Number() <<
 		endl;
 
+}
+
+void Address::freeAddress()
+{
+	delete []getCity();
+	delete []getStreet();
 }
