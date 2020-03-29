@@ -14,28 +14,30 @@ int Address::getHouse_Number() const
 	return House_Number;
 }
 
-bool Address::setCity(char* temp)
+bool Address::setCity(char* temp)//temp=city name
 {
 	int size = strlen(temp);
 	size++;
 	if (size >= 2) {
+		//allocate city name
 		City = new char[size];
 		strcpy_s(City,size, temp);
 		return true;
 	}
 	else return false;
 }
-bool Address::setStreet(char* temp)
+bool Address::setStreet(char* temp)//temp=street name
 {
 	int size = (strlen(temp) + 1);
 	if (size >= 2) {
+		//allocate street
 		Street = new char[size];
 		strcpy_s(Street,size, temp);
 		return true;
 	}
 	else return false;
 }
-bool Address::setHouse_Number(const int& temp)
+bool Address::setHouse_Number(const int& temp)//temp=houes number
 {
 	if (temp >= 1)
 	{
@@ -44,15 +46,15 @@ bool Address::setHouse_Number(const int& temp)
 	}
 	else return false;
 }
-
-void Address::showAddress() const
+//prints all address details
+void Address::showAddress() const 
 {
 	cout << "City: " << getCity() << endl <<
 		"Street: " << getStreet() << "  " << getHouse_Number() <<
 		endl;
 
 }
-
+//free address
 void Address::freeAddress()
 {
 	delete []getCity();
